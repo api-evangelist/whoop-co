@@ -1,0 +1,75 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: WHOOP
+providerId: whoop-co
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - Wearables
+  - Subscription
+description: FOCUS-aligned FinOps definition for the WHOOP membership and Developer Platform. WHOOP charges a flat
+  annual membership (ONE / PEAK / LIFE) that bundles hardware and unlimited app + API usage. There is no per-call
+  metering of the Developer Platform — cost predictability is high.
+sources:
+  - https://www.whoop.com/us/en/membership/
+  - https://developer.whoop.com/docs/developing/rate-limiting/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: WHOOP, Inc.
+serviceCategory: Fitness and Wellness
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Purchase
+    - Tax
+    - Credit
+  primaryUnit: member
+  secondaryUnits:
+    - api_request
+focusColumns:
+  ServiceName: WHOOP Membership
+  ServiceCategory: Fitness and Wellness
+  ProviderName: WHOOP
+  PublisherName: WHOOP, Inc.
+  InvoiceIssuerName: WHOOP, Inc.
+  PricingCategory: Subscription
+chargeRecords:
+  - name: WHOOP ONE annual membership
+    chargeCategory: Purchase
+    unit: member
+    quantity: 1
+    listUnitPrice: 199.00
+    currency: USD
+  - name: WHOOP PEAK annual membership
+    chargeCategory: Purchase
+    unit: member
+    quantity: 1
+    listUnitPrice: 239.00
+    currency: USD
+  - name: WHOOP LIFE annual membership
+    chargeCategory: Purchase
+    unit: member
+    quantity: 1
+    listUnitPrice: 359.00
+    currency: USD
+costAllocation:
+  - dimension: member
+    description: Cost is attributed to the WHOOP user/member; no per-team or per-tenant allocation surface is offered.
+  - dimension: integration
+    description: For organizations using WHOOP Unite (team plan), integration partner is typically responsible for
+      per-member subscription cost.
+notes:
+  - API usage is included in the membership at no incremental charge. There is no token/call/byte metering.
+  - The Trusted Partner program uses a private commercial agreement and is not exposed in self-serve FinOps surfaces.
+  - Hardware replacement and upgrade cycles are handled through the WHOOP Join program; treat as Purchase.

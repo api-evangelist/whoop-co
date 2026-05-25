@@ -1,0 +1,77 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: WHOOP
+providerId: whoop-co
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Vocabulary of WHOOP API concepts spanning physiological measurement, scoring, and OAuth scoping.
+tags:
+  - Vocabulary
+  - WHOOP
+  - Fitness
+  - Wearables
+concepts:
+  - term: Cycle
+    definition: A WHOOP physiological cycle, roughly 24 hours, anchored to sleep onset; container for daily Strain.
+    schema: json-schema/whoop-cycle-schema.json
+  - term: Recovery
+    definition: A 0-100 readiness score computed each morning from HRV (RMSSD), resting heart rate, sleep quality,
+      and optionally SpO2 and skin temperature.
+    schema: json-schema/whoop-recovery-schema.json
+  - term: Strain
+    definition: A 0-21 logarithmic scale of cardiovascular load. Daily Strain rolls up over a Cycle; per-workout
+      Strain is calculated for each Workout.
+  - term: Sleep
+    definition: A primary sleep or nap, including stage summaries (light, slow-wave, REM) and sleep-performance %.
+    schema: json-schema/whoop-sleep-schema.json
+  - term: Workout
+    definition: A discrete activity bout (auto-detected or member-tagged) with sport classification, Strain, and
+      heart-rate-zone breakdown.
+    schema: json-schema/whoop-workout-schema.json
+  - term: Heart Rate Variability (HRV)
+    definition: Variation between successive heartbeats. WHOOP reports RMSSD in milliseconds during sleep.
+  - term: Sleep Performance %
+    definition: Percent of needed sleep that the member actually got, where need adjusts for baseline, debt, strain,
+      and recent naps.
+  - term: Score State
+    definition: One of SCORED, PENDING_SCORE, or UNSCORABLE — describing whether WHOOP could compute scores for the
+      resource.
+  - term: Zone Durations
+    definition: Milliseconds spent in each of six heart-rate zones (zero through five) during a Workout.
+  - term: Trusted Partner
+    definition: A separately-credentialed program (client-credentials OAuth) for lab and diagnostics integrations
+      with access to requisitions and service requests.
+authentication:
+  - term: OAuth Authorization Code
+    definition: Primary member-data flow. Member authorizes the app at api.prod.whoop.com/oauth/oauth2/auth and the
+      app exchanges the code for an access token (and optional refresh token when `offline` scope is requested).
+  - term: OAuth Client Credentials
+    definition: Trusted Partner flow used to obtain a `whoop-partner/token` scoped token from /v2/partner/token.
+scopes:
+  - id: read:recovery
+    description: Read Recovery data including score, HRV, and resting heart rate.
+  - id: read:cycles
+    description: Read cycle data including day Strain and average heart rate.
+  - id: read:workout
+    description: Read workout data including activity Strain and average heart rate.
+  - id: read:sleep
+    description: Read sleep data including performance % and duration per stage.
+  - id: read:profile
+    description: Read basic profile data — name and email.
+  - id: read:body_measurement
+    description: Read body measurement data — height, weight, max heart rate.
+  - id: offline
+    description: Required to receive a refresh token alongside the access token.
+events:
+  - id: recovery.updated
+    description: A Recovery record was created or updated.
+  - id: recovery.deleted
+    description: A Recovery record was deleted.
+  - id: sleep.updated
+    description: A Sleep activity was created or updated.
+  - id: sleep.deleted
+    description: A Sleep activity was deleted.
+  - id: workout.updated
+    description: A Workout was created or updated.
+  - id: workout.deleted
+    description: A Workout was deleted.

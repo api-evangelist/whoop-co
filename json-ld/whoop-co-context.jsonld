@@ -1,0 +1,74 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "whoop": "https://api.prod.whoop.com/developer/v2/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Cycle": {
+      "@id": "whoop:Cycle",
+      "@context": {
+        "id": {"@id": "whoop:Cycle/id", "@type": "xsd:integer"},
+        "user_id": {"@id": "whoop:Cycle/userId", "@type": "xsd:integer"},
+        "start": {"@id": "whoop:Cycle/start", "@type": "xsd:dateTime"},
+        "end": {"@id": "whoop:Cycle/end", "@type": "xsd:dateTime"},
+        "timezone_offset": {"@id": "whoop:Cycle/timezoneOffset", "@type": "xsd:string"},
+        "score_state": {"@id": "whoop:Cycle/scoreState", "@type": "xsd:string"},
+        "score": {"@id": "whoop:Cycle/score"}
+      }
+    },
+    "Recovery": {
+      "@id": "whoop:Recovery",
+      "@context": {
+        "cycle_id": {"@id": "whoop:Recovery/cycleId", "@type": "xsd:integer"},
+        "sleep_id": {"@id": "whoop:Recovery/sleepId", "@type": "xsd:string"},
+        "recovery_score": {"@id": "whoop:Recovery/recoveryScore", "@type": "xsd:float"},
+        "resting_heart_rate": {"@id": "whoop:Recovery/restingHeartRate", "@type": "xsd:float"},
+        "hrv_rmssd_milli": {"@id": "whoop:Recovery/hrvRmssdMilli", "@type": "xsd:float"},
+        "spo2_percentage": {"@id": "whoop:Recovery/spo2Percentage", "@type": "xsd:float"}
+      }
+    },
+    "Sleep": {
+      "@id": "whoop:Sleep",
+      "@context": {
+        "id": {"@id": "whoop:Sleep/id", "@type": "xsd:string"},
+        "cycle_id": {"@id": "whoop:Sleep/cycleId", "@type": "xsd:integer"},
+        "start": {"@id": "whoop:Sleep/start", "@type": "xsd:dateTime"},
+        "end": {"@id": "whoop:Sleep/end", "@type": "xsd:dateTime"},
+        "nap": {"@id": "whoop:Sleep/nap", "@type": "xsd:boolean"},
+        "respiratory_rate": {"@id": "whoop:Sleep/respiratoryRate", "@type": "xsd:float"},
+        "sleep_performance_percentage": {"@id": "whoop:Sleep/performance", "@type": "xsd:float"}
+      }
+    },
+    "Workout": {
+      "@id": "whoop:Workout",
+      "@context": {
+        "id": {"@id": "whoop:Workout/id", "@type": "xsd:string"},
+        "sport_name": {"@id": "whoop:Workout/sportName", "@type": "xsd:string"},
+        "start": {"@id": "whoop:Workout/start", "@type": "xsd:dateTime"},
+        "end": {"@id": "whoop:Workout/end", "@type": "xsd:dateTime"},
+        "strain": {"@id": "whoop:Workout/strain", "@type": "xsd:float"},
+        "kilojoule": {"@id": "whoop:Workout/kilojoule", "@type": "xsd:float"}
+      }
+    },
+    "BodyMeasurement": {
+      "@id": "whoop:UserBodyMeasurement",
+      "@context": {
+        "height_meter": {"@id": "whoop:UserBodyMeasurement/heightMeter", "@type": "xsd:float"},
+        "weight_kilogram": {"@id": "whoop:UserBodyMeasurement/weightKilogram", "@type": "xsd:float"},
+        "max_heart_rate": {"@id": "whoop:UserBodyMeasurement/maxHeartRate", "@type": "xsd:integer"}
+      }
+    },
+    "UserProfile": {
+      "@id": "whoop:UserBasicProfile",
+      "@context": {
+        "user_id": {"@id": "whoop:UserBasicProfile/userId", "@type": "xsd:integer"},
+        "email": {"@id": "whoop:UserBasicProfile/email", "@type": "xsd:string"},
+        "first_name": {"@id": "whoop:UserBasicProfile/firstName", "@type": "xsd:string"},
+        "last_name": {"@id": "whoop:UserBasicProfile/lastName", "@type": "xsd:string"}
+      }
+    }
+  }
+}

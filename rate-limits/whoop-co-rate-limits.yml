@@ -1,0 +1,46 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: WHOOP
+providerId: whoop-co
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Quotas
+  - WHOOP
+description: WHOOP API rate-limit policy. All clients are subject to two concurrent limits — 100 requests/minute
+  and 10,000 requests/day — enforced per OAuth client. Standard X-RateLimit-* response headers are returned.
+sources:
+  - https://developer.whoop.com/docs/developing/rate-limiting/
+headers:
+  limit: X-RateLimit-Limit
+  remaining: X-RateLimit-Remaining
+  reset: X-RateLimit-Reset
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: fixed-window
+limits:
+  - id: per-minute
+    scope: client
+    metric: requests
+    limit: 100
+    window: 60s
+    description: 100 requests per minute per OAuth client.
+  - id: per-day
+    scope: client
+    metric: requests
+    limit: 10000
+    window: 86400s
+    description: 10,000 requests per day per OAuth client.
+behavior:
+  - When either limit is exceeded the server returns HTTP 429 Too Many Requests.
+  - Response includes `X-RateLimit-Limit` (e.g. `100;window=60`), `X-RateLimit-Remaining`, and `X-RateLimit-Reset`
+    (seconds until the nearest window resets).
+  - WHOOP does not currently advertise a `Retry-After` header — clients should back off using the reset header.
+  - Limits can be increased by submitting a use-case form to the WHOOP developer team.
+notes:
+  - Webhook delivery throughput is not subject to these limits — webhooks are pushed from WHOOP to subscriber URLs.
+  - The Trusted Partner client-credentials flow has the same default limits unless otherwise negotiated.

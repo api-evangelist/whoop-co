@@ -1,0 +1,196 @@
+aid: whoop-co
+url: https://raw.githubusercontent.com/api-evangelist/whoop-co/refs/heads/main/apis.yml
+apis:
+- aid: whoop-co:whoop-api
+  name: WHOOP API
+  tags:
+  - Fitness
+  - Wearables
+  - Health
+  - Recovery
+  - Sleep
+  - Strain
+  - Workout
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  properties:
+  - url: https://developer.whoop.com/api/
+    name: WHOOP API Reference
+    type: Documentation
+  - url: https://developer.whoop.com/docs/introduction/
+    name: WHOOP Developer Platform
+    type: Documentation
+  - url: https://api.prod.whoop.com/developer/doc/openapi.json
+    name: Official OpenAPI (JSON)
+    type: OpenAPI
+  - url: openapi/whoop-api-openapi.yml
+    name: WHOOP OpenAPI (mirrored)
+    type: OpenAPI
+  - url: json-schema/whoop-cycle-schema.json
+    type: JSONSchema
+  - url: json-schema/whoop-recovery-schema.json
+    type: JSONSchema
+  - url: json-schema/whoop-sleep-schema.json
+    type: JSONSchema
+  - url: json-schema/whoop-workout-schema.json
+    type: JSONSchema
+  - url: json-ld/whoop-co-context.jsonld
+    type: JSONLD
+  - url: examples/whoop-list-workouts-example.json
+    type: Example
+  - url: examples/whoop-get-recovery-example.json
+    type: Example
+  - url: examples/whoop-list-sleep-example.json
+    type: Example
+  - url: examples/whoop-webhook-sleep-updated-example.json
+    type: Example
+  - url: rules/whoop-rules.yml
+    type: SpectralRuleset
+  - type: NaftikoCapability
+    url: capabilities/whoop-cycle.yaml
+  - type: NaftikoCapability
+    url: capabilities/whoop-recovery.yaml
+  - type: NaftikoCapability
+    url: capabilities/whoop-sleep.yaml
+  - type: NaftikoCapability
+    url: capabilities/whoop-workout.yaml
+  - type: NaftikoCapability
+    url: capabilities/whoop-user.yaml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
+  description: The WHOOP API exposes member fitness, strain, recovery, sleep, workout, and body measurement data captured
+    by the WHOOP wrist-worn wearable. v2 endpoints return UUID-based resources covering physiological cycles, sleep
+    activities, workouts, recovery scores, and user profile data, with webhook notifications for `recovery.updated`,
+    `recovery.deleted`, `sleep.updated`, `sleep.deleted`, `workout.updated`, and `workout.deleted` events. OAuth 2.0
+    authorization-code flow protects member data; a separate client-credentials flow (Trusted Partner) supports lab-grade
+    health partners. Rate limits default to 100 requests/minute and 10,000 requests/day per client.
+- aid: whoop-co:whoop-partner-api
+  name: WHOOP Trusted Partner API
+  tags:
+  - Healthcare
+  - Diagnostics
+  - Labs
+  - Service Requests
+  - Partner
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  properties:
+  - url: https://developer.whoop.com/api/
+    name: Partner Endpoints (WHOOP API Reference)
+    type: Documentation
+  - url: openapi/whoop-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/whoop-partner.yaml
+  description: The WHOOP Trusted Partner API enables lab and diagnostics partners to manage lab requisitions, service
+    requests, appointments, and diagnostic report results for WHOOP members. It uses an OAuth 2.0 client-credentials
+    flow scoped to `whoop-partner/token`, and exposes endpoints for retrieving and updating service-request status,
+    creating diagnostic-report observations, and generating test data in development environments.
+name: WHOOP
+tags:
+- Fitness
+- Wearables
+- Health
+- Recovery
+- Sleep
+- Strain
+- Heart Rate
+- Workout
+- Biometrics
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- type: Portal
+  url: https://www.whoop.com/
+- type: Documentation
+  url: https://developer.whoop.com/
+- type: Documentation
+  url: https://developer.whoop.com/docs/introduction/
+- type: GettingStarted
+  url: https://developer.whoop.com/docs/developing/oauth/
+- type: Authentication
+  url: https://developer.whoop.com/docs/developing/oauth/
+- type: RateLimits
+  url: https://developer.whoop.com/docs/developing/rate-limiting/
+- type: Webhooks
+  url: https://developer.whoop.com/docs/developing/webhooks/
+- type: Support
+  url: https://developer.whoop.com/docs/developing/support/
+- type: Migration
+  url: https://developer.whoop.com/docs/developing/v1-v2-migration/
+- type: DeveloperDashboard
+  url: https://developer-dashboard.whoop.com/
+- type: Pricing
+  url: https://www.whoop.com/us/en/membership/
+- type: Support
+  url: https://support.whoop.com/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/whoop/
+- type: Twitter
+  url: https://twitter.com/whoop
+- type: ContactUs
+  url: https://www.whoop.com/us/en/contact-us/
+- type: PrivacyPolicy
+  url: https://www.whoop.com/legal/privacy-policy/
+- type: TermsOfService
+  url: https://www.whoop.com/legal/terms-of-use/
+- type: APITerms
+  url: https://www.whoop.com/legal/api-terms/
+- url: plans/whoop-co-plans-pricing.yml
+  type: Plans
+- url: rate-limits/whoop-co-rate-limits.yml
+  type: RateLimits
+- url: finops/whoop-co-finops.yml
+  type: FinOps
+- url: vocabulary/whoop-co-vocabulary.yml
+  type: Vocabulary
+- type: Features
+  data:
+  - WHOOP 5.0 — fifth-generation wrist-worn strap with 14-day battery life and on-skin sensor improvements
+  - WHOOP MG — medical-grade variant adding ECG and blood-pressure readings
+  - Continuous 24/7 monitoring of heart rate, HRV, respiratory rate, skin temperature, and SpO2
+  - Daily Recovery score based on HRV, resting heart rate, and sleep performance
+  - Daily Strain score capturing cardiovascular load across all activities
+  - Sleep coaching with stage-by-stage analysis (light, deep, REM) and Sleep Performance %
+  - Workout auto-detection with heart-rate zone breakdowns
+  - Stress Monitor and Daily Outlook AI coaching
+  - Health Monitor with vitals trends and abnormality alerts
+  - WHOOP Coach generative AI assistant for personalized insights
+  - Three subscription tiers — ONE ($199/yr), PEAK ($239/yr), LIFE ($359/yr)
+  - Developer Platform with OAuth 2.0 (authorization code) member-data API
+  - Trusted Partner program with client-credentials OAuth for lab and diagnostics integrations
+  - v2 REST API with UUID resource identifiers and pagination cursors
+  - Webhooks for recovery, sleep, and workout updated/deleted events with HMAC SHA-256 signing
+  - Six member-data scopes — read:recovery, read:cycles, read:workout, read:sleep, read:profile, read:body_measurement
+  - Rate limits — 100 requests/minute and 10,000 requests/day per client, with X-RateLimit-* headers
+  - v1-to-v2 activity-mapping endpoint for migration
+  - Mobile apps for iOS, Android, and Wear OS / Apple Watch companion experience
+  - Garmin, Strava, TrainingPeaks, Apple Health, and Google Health Connect integrations
+  - Community SDKs (Python `hedgertronic/whoop`, MCP server `shashankswe2020-ux/whoop-mcp`)
+  sources:
+  - https://developer.whoop.com/api/
+  - https://developer.whoop.com/docs/introduction/
+  - https://developer.whoop.com/docs/developing/oauth/
+  - https://developer.whoop.com/docs/developing/rate-limiting/
+  - https://developer.whoop.com/docs/developing/webhooks/
+  - https://www.whoop.com/us/en/membership/
+  updated: '2026-05-25'
+created: '2026-05-25'
+modified: '2026-05-25'
+position: Consuming
+description: WHOOP is a wearable health and performance company whose wrist-worn strap (WHOOP 5.0 and medical-grade
+  WHOOP MG) measures heart rate, HRV, respiratory rate, skin temperature, and SpO2 24/7 to compute daily Recovery,
+  Strain, and Sleep Performance scores. The WHOOP Developer Platform exposes member fitness data through an
+  OAuth-protected REST API (v2) covering physiological cycles, sleep, workouts, recovery, and body measurements, plus
+  webhooks for resource updates and a Trusted Partner API for lab/diagnostics integrations.
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com
+specificationVersion: '0.16'

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/whoop-co/whoop-recovery-schema.json",
+  "title": "WHOOP Recovery",
+  "description": "Schema for a WHOOP Recovery score. Recovery is calculated each morning after the prior sleep, expressing how prepared the member's body is to take on Strain. It is derived from heart-rate variability (RMSSD), resting heart rate, and sleep quality.",
+  "type": "object",
+  "required": ["cycle_id", "sleep_id", "user_id", "created_at", "updated_at", "score_state"],
+  "properties": {
+    "cycle_id": {"type": "integer", "format": "int64", "description": "Physiological cycle this Recovery is for."},
+    "sleep_id": {"type": "string", "format": "uuid", "description": "ID of the Sleep activity the Recovery is based on."},
+    "user_id": {"type": "integer", "format": "int64", "description": "WHOOP user the Recovery belongs to."},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "score_state": {"type": "string", "enum": ["SCORED", "PENDING_SCORE", "UNSCORABLE"]},
+    "score": {
+      "type": "object",
+      "required": ["user_calibrating", "recovery_score", "resting_heart_rate", "hrv_rmssd_milli"],
+      "properties": {
+        "user_calibrating": {"type": "boolean", "description": "True if WHOOP is still calibrating baselines for the user."},
+        "recovery_score": {"type": "number", "format": "float", "minimum": 0, "maximum": 100, "description": "Percentage 0-100 expressing readiness."},
+        "resting_heart_rate": {"type": "number", "format": "float", "description": "Resting heart rate in bpm."},
+        "hrv_rmssd_milli": {"type": "number", "format": "float", "description": "Heart-rate variability RMSSD in milliseconds."},
+        "spo2_percentage": {"type": "number", "format": "float", "description": "Average SpO2 measured during sleep."},
+        "skin_temp_celsius": {"type": "number", "format": "float", "description": "Skin temperature in Celsius."}
+      }
+    }
+  }
+}

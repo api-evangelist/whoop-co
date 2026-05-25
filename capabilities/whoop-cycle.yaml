@@ -1,0 +1,130 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WHOOP API — Cycle
+  description: 'WHOOP physiological cycles. 3 operations covering list, get-by-id, and per-cycle sleep lookup.
+    Lead operation: WHOOP List Cycles.'
+  tags:
+  - WHOOP
+  - Cycle
+  - Strain
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    WHOOP_ACCESS_TOKEN: WHOOP_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: whoop-cycle
+    baseUri: https://api.prod.whoop.com/developer
+    description: WHOOP Cycle business capability — list and retrieve physiological cycles plus their sleeps.
+    resources:
+    - name: v2-cycle
+      path: /v2/cycle
+      operations:
+      - name: listcycles
+        method: GET
+        description: List WHOOP physiological cycles for the authorized member.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Page size (max 25).
+        - name: start
+          in: query
+          type: string
+          description: ISO-8601 start of date range.
+        - name: end
+          in: query
+          type: string
+          description: ISO-8601 end of date range.
+        - name: nextToken
+          in: query
+          type: string
+          description: Pagination cursor from the previous response.
+    - name: v2-cycle-by-id
+      path: /v2/cycle/{cycleId}
+      operations:
+      - name: getcycle
+        method: GET
+        description: Get a specific WHOOP physiological cycle by ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cycleId
+          in: path
+          type: integer
+          required: true
+    - name: v2-cycle-sleep
+      path: /v2/cycle/{cycleId}/sleep
+      operations:
+      - name: getsleepforcycle
+        method: GET
+        description: Get the primary sleep associated with a physiological cycle.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cycleId
+          in: path
+          type: integer
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.WHOOP_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: whoop-cycle-rest
+    port: 8080
+    description: REST adapter for WHOOP Cycle. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/v2/cycle
+      name: v2-cycle
+      operations:
+      - method: GET
+        name: listcycles
+        description: List WHOOP physiological cycles.
+        call: whoop-cycle.listcycles
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: whoop-cycle-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WHOOP Cycle. One tool per consumed operation.
+    tools:
+    - name: whoop-list-cycles
+      description: List WHOOP physiological cycles for the authorized member.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: whoop-cycle.listcycles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: whoop-get-cycle
+      description: Get a specific WHOOP cycle by ID.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: whoop-cycle.getcycle
+      with:
+        cycleId: tools.cycleId
+      outputParameters:
+      - type: object
+        mapping: $.

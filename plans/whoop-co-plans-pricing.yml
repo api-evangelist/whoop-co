@@ -1,0 +1,87 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: WHOOP
+providerId: whoop-co
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Fitness
+  - Wearables
+  - Membership
+  - Subscription
+description: WHOOP is sold as an annual subscription that includes the strap hardware and access to the WHOOP app
+  and Developer Platform. There is no consumption-based pricing on the API itself — developer access is included
+  for active members and rate-limited rather than metered.
+sources:
+  - https://www.whoop.com/us/en/membership/
+  - https://developer.whoop.com/
+  - https://developer.whoop.com/docs/developing/rate-limiting/
+plans:
+  - id: whoop-one
+    name: WHOOP ONE
+    type: subscription
+    description: Core WHOOP membership — strap hardware plus app access to Strain, Recovery, Sleep, and Workout scores.
+    entries:
+      - label: Annual membership
+        name: annual
+        type: flat
+        metric: member
+        limit: 1
+        timeFrame: year
+        geo: US
+        unit: 1
+        price: '199.00'
+        userMultiplied: true
+    elements:
+      - name: WHOOP 5.0 strap hardware included
+      - name: Daily Recovery, Strain, and Sleep Performance
+      - name: Workout auto-detection and Heart Rate zones
+      - name: Stress Monitor and Daily Outlook
+      - name: Full WHOOP Developer Platform API access
+  - id: whoop-peak
+    name: WHOOP PEAK
+    type: subscription
+    description: Mid-tier membership adding Health Monitor, Healthspan, and advanced sleep coaching.
+    entries:
+      - label: Annual membership
+        name: annual
+        type: flat
+        metric: member
+        limit: 1
+        timeFrame: year
+        geo: US
+        unit: 1
+        price: '239.00'
+        userMultiplied: true
+    elements:
+      - name: Everything in ONE
+      - name: Health Monitor with vitals trend tracking
+      - name: Healthspan and Pace of Aging
+      - name: WHOOP Coach (generative AI)
+      - name: Wireless PowerPack accessory
+  - id: whoop-life
+    name: WHOOP LIFE
+    type: subscription
+    description: Top-tier medical-grade membership with WHOOP MG hardware (ECG, blood pressure insights).
+    entries:
+      - label: Annual membership
+        name: annual
+        type: flat
+        metric: member
+        limit: 1
+        timeFrame: year
+        geo: US
+        unit: 1
+        price: '359.00'
+        userMultiplied: true
+    elements:
+      - name: Everything in PEAK
+      - name: WHOOP MG medical-grade strap (ECG)
+      - name: Blood Pressure insights
+      - name: Advanced cardiovascular insights
+notes:
+  - The WHOOP Developer Platform API is included with any active membership and is rate-limited (100 req/min,
+    10,000 req/day per client) rather than metered or priced per call. Increases require a written request to WHOOP.
+  - Trusted Partner API access is gated by a separate commercial agreement, not self-serve pricing.

@@ -1,0 +1,108 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WHOOP API — Recovery
+  description: WHOOP Recovery scores. List recoveries and fetch a recovery by cycle.
+  tags:
+  - WHOOP
+  - Recovery
+  - HRV
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    WHOOP_ACCESS_TOKEN: WHOOP_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: whoop-recovery
+    baseUri: https://api.prod.whoop.com/developer
+    description: WHOOP Recovery business capability — daily readiness derived from HRV, RHR, and sleep.
+    resources:
+    - name: v2-recovery
+      path: /v2/recovery
+      operations:
+      - name: listrecoveries
+        method: GET
+        description: List WHOOP Recovery records.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+        - name: start
+          in: query
+          type: string
+        - name: end
+          in: query
+          type: string
+        - name: nextToken
+          in: query
+          type: string
+    - name: v2-cycle-recovery
+      path: /v2/cycle/{cycleId}/recovery
+      operations:
+      - name: getrecoveryforcycle
+        method: GET
+        description: Get the Recovery for a specific cycle.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cycleId
+          in: path
+          type: integer
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.WHOOP_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: whoop-recovery-rest
+    port: 8080
+    description: REST adapter for WHOOP Recovery.
+    resources:
+    - path: /v1/v2/recovery
+      name: v2-recovery
+      operations:
+      - method: GET
+        name: listrecoveries
+        call: whoop-recovery.listrecoveries
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: whoop-recovery-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WHOOP Recovery.
+    tools:
+    - name: whoop-list-recoveries
+      description: List WHOOP Recovery records.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: whoop-recovery.listrecoveries
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: whoop-get-recovery-for-cycle
+      description: Get the Recovery for a specific cycle.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: whoop-recovery.getrecoveryforcycle
+      with:
+        cycleId: tools.cycleId
+      outputParameters:
+      - type: object
+        mapping: $.

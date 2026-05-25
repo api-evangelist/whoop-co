@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/whoop-co/whoop-sleep-schema.json",
+  "title": "WHOOP Sleep",
+  "description": "Schema for a WHOOP Sleep activity. Sleep activities can be primary nightly sleeps or short naps and include stage-by-stage breakdowns (light, slow-wave, REM), sleep performance percentage, and physiological measurements such as respiratory rate.",
+  "type": "object",
+  "required": ["id", "cycle_id", "user_id", "created_at", "updated_at", "start", "end", "timezone_offset", "nap", "score_state"],
+  "properties": {
+    "id": {"type": "string", "format": "uuid", "description": "Unique sleep identifier (v2 UUID)."},
+    "v1_id": {"type": "integer", "format": "int64", "description": "Legacy v1 numeric ID (deprecated, sunsetting 2026)."},
+    "cycle_id": {"type": "integer", "format": "int64", "description": "Physiological cycle this sleep belongs to."},
+    "user_id": {"type": "integer", "format": "int64"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "start": {"type": "string", "format": "date-time"},
+    "end": {"type": "string", "format": "date-time"},
+    "timezone_offset": {"type": "string"},
+    "nap": {"type": "boolean", "description": "True if the activity is a nap rather than primary sleep."},
+    "score_state": {"type": "string", "enum": ["SCORED", "PENDING_SCORE", "UNSCORABLE"]},
+    "score": {
+      "type": "object",
+      "properties": {
+        "stage_summary": {
+          "type": "object",
+          "properties": {
+            "total_in_bed_time_milli": {"type": "integer"},
+            "total_awake_time_milli": {"type": "integer"},
+            "total_no_data_time_milli": {"type": "integer"},
+            "total_light_sleep_time_milli": {"type": "integer"},
+            "total_slow_wave_sleep_time_milli": {"type": "integer"},
+            "total_rem_sleep_time_milli": {"type": "integer"},
+            "sleep_cycle_count": {"type": "integer"},
+            "disturbance_count": {"type": "integer"}
+          }
+        },
+        "sleep_needed": {
+          "type": "object",
+          "properties": {
+            "baseline_milli": {"type": "integer"},
+            "need_from_sleep_debt_milli": {"type": "integer"},
+            "need_from_recent_strain_milli": {"type": "integer"},
+            "need_from_recent_nap_milli": {"type": "integer"}
+          }
+        },
+        "respiratory_rate": {"type": "number", "format": "float"},
+        "sleep_performance_percentage": {"type": "number", "format": "float"},
+        "sleep_consistency_percentage": {"type": "number", "format": "float"},
+        "sleep_efficiency_percentage": {"type": "number", "format": "float"}
+      }
+    }
+  }
+}
