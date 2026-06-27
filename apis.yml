@@ -37,13 +37,13 @@ apis:
       - url: json-ld/whoop-co-context.jsonld
         type: JSONLD
       - url: examples/whoop-list-workouts-example.json
-        type: Example
+        type: Examples
       - url: examples/whoop-get-recovery-example.json
-        type: Example
+        type: Examples
       - url: examples/whoop-list-sleep-example.json
-        type: Example
+        type: Examples
       - url: examples/whoop-webhook-sleep-updated-example.json
-        type: Example
+        type: Examples
       - url: rules/whoop-rules.yml
         type: SpectralRuleset
       - type: Authentication
