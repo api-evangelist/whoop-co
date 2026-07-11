@@ -95,6 +95,10 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: Authentication
+    url: authentication/whoop-co-authentication.yml
+  - type: OAuthScopes
+    url: scopes/whoop-co-scopes.yml
   - type: Portal
     url: https://www.whoop.com/
   - type: Documentation
@@ -139,6 +143,8 @@ common:
     type: FinOps
   - url: vocabulary/whoop-co-vocabulary.yml
     type: Vocabulary
+  - url: https://www.whoop.com/us/en/thelocker/
+    type: Blog
   - type: Features
     data:
       - WHOOP 5.0 — fifth-generation wrist-worn strap with 14-day battery life and on-skin sensor improvements
