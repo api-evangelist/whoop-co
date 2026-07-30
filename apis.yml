@@ -1,85 +1,286 @@
 aid: whoop-co
 url: https://raw.githubusercontent.com/api-evangelist/whoop-co/refs/heads/main/apis.yml
 apis:
-  - aid: whoop-co:whoop-api
-    name: WHOOP API
-    tags:
-      - Fitness
-      - Wearables
-      - Health
-      - Recovery
-      - Sleep
-      - Strain
-      - Workout
-    humanURL: https://developer.whoop.com/api/
-    baseURL: https://api.prod.whoop.com/developer
-    properties:
-      - url: https://developer.whoop.com/api/
-        name: WHOOP API Reference
-        type: Documentation
-      - url: https://developer.whoop.com/docs/introduction/
-        name: WHOOP Developer Platform
-        type: Documentation
-      - url: https://api.prod.whoop.com/developer/doc/openapi.json
-        name: Official OpenAPI (JSON)
-        type: OpenAPI
-      - url: openapi/whoop-api-openapi.yml
-        name: WHOOP OpenAPI (mirrored)
-        type: OpenAPI
-      - url: json-schema/whoop-cycle-schema.json
-        type: JSONSchema
-      - url: json-schema/whoop-recovery-schema.json
-        type: JSONSchema
-      - url: json-schema/whoop-sleep-schema.json
-        type: JSONSchema
-      - url: json-schema/whoop-workout-schema.json
-        type: JSONSchema
-      - url: json-ld/whoop-co-context.jsonld
-        type: JSONLD
-      - url: examples/whoop-list-workouts-example.json
-        type: Examples
-      - url: examples/whoop-get-recovery-example.json
-        type: Examples
-      - url: examples/whoop-list-sleep-example.json
-        type: Examples
-      - url: examples/whoop-webhook-sleep-updated-example.json
-        type: Examples
-      - url: rules/whoop-rules.yml
-        type: SpectralRuleset
-      - type: Authentication
-        url: https://developer.whoop.com/docs/developing/oauth/
-      - type: RateLimits
-        url: https://developer.whoop.com/docs/developing/rate-limiting/
-      - type: Webhooks
-        url: https://developer.whoop.com/docs/developing/webhooks/
-    description: >-
-      The WHOOP API exposes member fitness, strain, recovery, sleep, workout, and body measurement data captured by the
-      WHOOP wrist-worn wearable. v2 endpoints return UUID-based resources covering physiological cycles, sleep
-      activities, workouts, recovery scores, and user profile data, with webhook notifications for `recovery.updated`,
-      `recovery.deleted`, `sleep.updated`, `sleep.deleted`, `workout.updated`, and `workout.deleted` events. OAuth 2.0
-      authorization-code flow protects member data; a separate client-credentials flow (Trusted Partner) supports
-      lab-grade health partners. Rate limits default to 100 requests/minute and 10,000 requests/day per client.
-  - aid: whoop-co:whoop-partner-api
-    name: WHOOP Trusted Partner API
-    tags:
-      - Healthcare
-      - Diagnostics
-      - Labs
-      - Service Requests
-      - Partner
-    humanURL: https://developer.whoop.com/api/
-    baseURL: https://api.prod.whoop.com/developer
-    properties:
-      - url: https://developer.whoop.com/api/
-        name: Partner Endpoints (WHOOP API Reference)
-        type: Documentation
-      - url: openapi/whoop-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The WHOOP Trusted Partner API enables lab and diagnostics partners to manage lab requisitions, service requests,
-      appointments, and diagnostic report results for WHOOP members. It uses an OAuth 2.0 client-credentials flow scoped
-      to `whoop-partner/token`, and exposes endpoints for retrieving and updating service-request status, creating
-      diagnostic-report observations, and generating test data in development environments.
+- aid: whoop-co:whoop-co-activity-id-mapping-api
+  name: WHOOP Activity ID Mapping API
+  description: Utility endpoints for activity ID mapping
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  tags:
+  - Activity ID Mapping
+  properties:
+  - type: OpenAPI
+    url: openapi/whoop-co-activity-id-mapping-api-openapi.yml
+  - type: Documentation
+    url: https://developer.whoop.com/api/
+  - type: Documentation
+    url: https://developer.whoop.com/docs/introduction/
+  - type: JSONSchema
+    url: json-schema/whoop-cycle-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-recovery-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-sleep-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-workout-schema.json
+  - type: JSONLD
+    url: json-ld/whoop-co-context.jsonld
+  - type: Examples
+    url: examples/whoop-list-workouts-example.json
+  - type: Examples
+    url: examples/whoop-get-recovery-example.json
+  - type: Examples
+    url: examples/whoop-list-sleep-example.json
+  - type: Examples
+    url: examples/whoop-webhook-sleep-updated-example.json
+  - type: SpectralRuleset
+    url: rules/whoop-rules.yml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
+- aid: whoop-co:whoop-co-cycle-api
+  name: WHOOP Cycle API
+  description: The Cycle API from WHOOP — 3 operation(s) for cycle.
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  tags:
+  - Cycle
+  properties:
+  - type: OpenAPI
+    url: openapi/whoop-co-cycle-api-openapi.yml
+  - type: Documentation
+    url: https://developer.whoop.com/api/
+  - type: Documentation
+    url: https://developer.whoop.com/docs/introduction/
+  - type: JSONSchema
+    url: json-schema/whoop-cycle-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-recovery-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-sleep-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-workout-schema.json
+  - type: JSONLD
+    url: json-ld/whoop-co-context.jsonld
+  - type: Examples
+    url: examples/whoop-list-workouts-example.json
+  - type: Examples
+    url: examples/whoop-get-recovery-example.json
+  - type: Examples
+    url: examples/whoop-list-sleep-example.json
+  - type: Examples
+    url: examples/whoop-webhook-sleep-updated-example.json
+  - type: SpectralRuleset
+    url: rules/whoop-rules.yml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
+- aid: whoop-co:whoop-co-partner-api
+  name: WHOOP Partner API
+  description: Endpoints for trusted WHOOP partner operations
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  tags:
+  - Partner
+  properties:
+  - type: OpenAPI
+    url: openapi/whoop-co-partner-api-openapi.yml
+  - type: Documentation
+    url: https://developer.whoop.com/api/
+  - type: Documentation
+    url: https://developer.whoop.com/docs/introduction/
+  - type: JSONSchema
+    url: json-schema/whoop-cycle-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-recovery-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-sleep-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-workout-schema.json
+  - type: JSONLD
+    url: json-ld/whoop-co-context.jsonld
+  - type: Examples
+    url: examples/whoop-list-workouts-example.json
+  - type: Examples
+    url: examples/whoop-get-recovery-example.json
+  - type: Examples
+    url: examples/whoop-list-sleep-example.json
+  - type: Examples
+    url: examples/whoop-webhook-sleep-updated-example.json
+  - type: SpectralRuleset
+    url: rules/whoop-rules.yml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
+- aid: whoop-co:whoop-co-recovery-api
+  name: WHOOP Recovery API
+  description: The Recovery API from WHOOP — 2 operation(s) for recovery.
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  tags:
+  - Recovery
+  properties:
+  - type: OpenAPI
+    url: openapi/whoop-co-recovery-api-openapi.yml
+  - type: Documentation
+    url: https://developer.whoop.com/api/
+  - type: Documentation
+    url: https://developer.whoop.com/docs/introduction/
+  - type: JSONSchema
+    url: json-schema/whoop-cycle-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-recovery-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-sleep-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-workout-schema.json
+  - type: JSONLD
+    url: json-ld/whoop-co-context.jsonld
+  - type: Examples
+    url: examples/whoop-list-workouts-example.json
+  - type: Examples
+    url: examples/whoop-get-recovery-example.json
+  - type: Examples
+    url: examples/whoop-list-sleep-example.json
+  - type: Examples
+    url: examples/whoop-webhook-sleep-updated-example.json
+  - type: SpectralRuleset
+    url: rules/whoop-rules.yml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
+- aid: whoop-co:whoop-co-sleep-api
+  name: WHOOP Sleep API
+  description: The Sleep API from WHOOP — 2 operation(s) for sleep.
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  tags:
+  - Sleep
+  properties:
+  - type: OpenAPI
+    url: openapi/whoop-co-sleep-api-openapi.yml
+  - type: Documentation
+    url: https://developer.whoop.com/api/
+  - type: Documentation
+    url: https://developer.whoop.com/docs/introduction/
+  - type: JSONSchema
+    url: json-schema/whoop-cycle-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-recovery-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-sleep-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-workout-schema.json
+  - type: JSONLD
+    url: json-ld/whoop-co-context.jsonld
+  - type: Examples
+    url: examples/whoop-list-workouts-example.json
+  - type: Examples
+    url: examples/whoop-get-recovery-example.json
+  - type: Examples
+    url: examples/whoop-list-sleep-example.json
+  - type: Examples
+    url: examples/whoop-webhook-sleep-updated-example.json
+  - type: SpectralRuleset
+    url: rules/whoop-rules.yml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
+- aid: whoop-co:whoop-co-user-api
+  name: WHOOP User API
+  description: Endpoints for retrieving user profile and measurement data.
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/whoop-co-user-api-openapi.yml
+  - type: Documentation
+    url: https://developer.whoop.com/api/
+  - type: Documentation
+    url: https://developer.whoop.com/docs/introduction/
+  - type: JSONSchema
+    url: json-schema/whoop-cycle-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-recovery-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-sleep-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-workout-schema.json
+  - type: JSONLD
+    url: json-ld/whoop-co-context.jsonld
+  - type: Examples
+    url: examples/whoop-list-workouts-example.json
+  - type: Examples
+    url: examples/whoop-get-recovery-example.json
+  - type: Examples
+    url: examples/whoop-list-sleep-example.json
+  - type: Examples
+    url: examples/whoop-webhook-sleep-updated-example.json
+  - type: SpectralRuleset
+    url: rules/whoop-rules.yml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
+- aid: whoop-co:whoop-co-workout-api
+  name: WHOOP Workout API
+  description: The Workout API from WHOOP — 2 operation(s) for workout.
+  humanURL: https://developer.whoop.com/api/
+  baseURL: https://api.prod.whoop.com/developer
+  tags:
+  - Workout
+  properties:
+  - type: OpenAPI
+    url: openapi/whoop-co-workout-api-openapi.yml
+  - type: Documentation
+    url: https://developer.whoop.com/api/
+  - type: Documentation
+    url: https://developer.whoop.com/docs/introduction/
+  - type: JSONSchema
+    url: json-schema/whoop-cycle-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-recovery-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-sleep-schema.json
+  - type: JSONSchema
+    url: json-schema/whoop-workout-schema.json
+  - type: JSONLD
+    url: json-ld/whoop-co-context.jsonld
+  - type: Examples
+    url: examples/whoop-list-workouts-example.json
+  - type: Examples
+    url: examples/whoop-get-recovery-example.json
+  - type: Examples
+    url: examples/whoop-list-sleep-example.json
+  - type: Examples
+    url: examples/whoop-webhook-sleep-updated-example.json
+  - type: SpectralRuleset
+    url: rules/whoop-rules.yml
+  - type: Authentication
+    url: https://developer.whoop.com/docs/developing/oauth/
+  - type: RateLimits
+    url: https://developer.whoop.com/docs/developing/rate-limiting/
+  - type: Webhooks
+    url: https://developer.whoop.com/docs/developing/webhooks/
 name: WHOOP
 tags:
   - Fitness
@@ -92,9 +293,24 @@ tags:
   - Workout
   - Biometrics
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/whoop-co.png
 access: 3rd-Party
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/whoop/overview
   - type: AgenticAccess
     url: agentic-access/whoop-co-agentic-access.yml
   - type: DomainSecurity
