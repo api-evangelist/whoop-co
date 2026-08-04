@@ -1,0 +1,26 @@
+{
+  "provider": "whoop-co",
+  "sources": [
+    "whoop-co-activity-id-mapping-api-openapi.yml",
+    "whoop-co-cycle-api-openapi.yml",
+    "whoop-co-partner-api-openapi.yml",
+    "whoop-co-recovery-api-openapi.yml",
+    "whoop-co-sleep-api-openapi.yml",
+    "whoop-co-user-api-openapi.yml",
+    "whoop-co-workout-api-openapi.yml"
+  ],
+  "outputs": [
+    "whoop-co-activity-id-mapping-api-openapi.yml",
+    "whoop-co-cycle-api-openapi.yml",
+    "whoop-co-partner-api-openapi.yml",
+    "whoop-co-recovery-api-openapi.yml",
+    "whoop-co-sleep-api-openapi.yml",
+    "whoop-co-user-api-openapi.yml",
+    "whoop-co-workout-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
